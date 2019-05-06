@@ -24,7 +24,7 @@ $("#reader-form").on('submit',function(event) {
 function adminCheck() {
     event.preventDefault()
     if(document.getElementById("IDInput").value == 123 && document.getElementById("PasswordInput").value == 123){
-        $.Cookie("logged-in", "admin", { path: '/', exipires: 1000 });
+        setCookie("logged-in", "admin")
         $(location).attr("href","home.php")
     }else{
         alert("Invalid account information")
@@ -39,4 +39,11 @@ function login(cardNO, response) {
             cardNO:cardNO
         }
     })
+}
+
+function setCookie(name, value) {
+    var date = new Date();
+    date.setTime(date.getTime()+1000000);
+    var expires = "; expires="+date.toGMTString();
+    document.cookie = name+"="+value+expires+"; path=/";
 }

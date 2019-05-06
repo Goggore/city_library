@@ -23,8 +23,48 @@
         </li>
     </ul>
 </div>
-<div id="booksPage" style="width: 500px;height: 500px;background-color: #b1dfbb"></div>
-<div id="reservationPage" style="width: 500px;height: 500px;background-color: #1c7430;display: none"></div>
+<div id="booksPage">
+    <div style="padding-top: 2%">
+        <button type="button" class="btn btn-secondary" style="margin-left:2%;display: inline-block">Checkout</button>
+        <button type="button" class="btn btn-secondary" style="margin-left:1%;display: inline-block">Return</button>
+        <button type="button" class="btn btn-secondary" style="margin-left:1%;display: inline-block">Search</button>
+        <button type="button" class="btn btn-secondary" style="margin-left:1%;display: inline-block">Compute fine</button>
+        <?php
+    include_once('api/dbcheck.php');
+$sql = "SELECT TITLE, PDATE FROM DOCUMENT";
+$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        echo "<table class='table' style='margin-top: 5vh'><tr><th style='text-align: center'>Title</th><th style='text-align: center'>Return Date</th></tr>";
+        while($row = $result->fetch_assoc()) {
+        echo "<tr><td style='text-align: center'>".$row["TITLE"]."</td><td style='text-align: center'>".$row["PDATE"]."</td></tr>";
+        }
+        echo "</table>";
+        } else {
+        echo "There is no reader information";
+        }
+        ?>
+    </div>
+</div>
+<div id="reservationPage" style="display: none">
+    <div style="padding-top: 2%">
+        <button type="button" class="btn btn-secondary" style="margin-left:2%;display: inline-block">Reserve</button>
+        <?php
+    include_once('api/dbcheck.php');
+$sql = "SELECT RNAME, ADDRESS FROM READER WHERE READERID = $user";
+$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        echo "<table class='table' style='margin-top: 5vh'><tr><th style='text-align: center'>Title</th><th style='text-align: center'>Status</th></tr>";
+        while($row = $result->fetch_assoc()) {
+        echo "<tr><td style='text-align: center'>".$row["RNAME"]."</td><td style='text-align: center'>".$row["ADDRESS"]."</td></tr>";
+        }
+        echo "</table>";
+        } else {
+        echo "There is no reader information";
+        }
+        $conn->close();
+        ?>
+    </div>
+</div>
 <script>
 
 var btns = ['#books','#reservation']

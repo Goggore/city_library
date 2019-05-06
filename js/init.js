@@ -24,7 +24,7 @@ $("#reader-form").on('submit',function(event) {
 function adminCheck() {
     event.preventDefault()
     if(document.getElementById("IDInput").value == 123 && document.getElementById("PasswordInput").value == 123){
-        setCookie("logged-in", "admin")
+        setCookie("logged_in", "admin")
         $(location).attr("href","home.php")
     }else{
         alert("Invalid account information")

@@ -4,7 +4,7 @@ $("#addCopy-form").on('submit',function(event) {
     var CopyNo = event.target.CopyNo.value
     var LibID = event.target.LibID.value
     var Position = event.target.Position.value
-    addReader(DocID,CopyNo,LibID,Position,function (Res) {
+    addCopy(DocID,CopyNo,LibID,Position,function (Res) {
         var res = JSON.parse(Res)
         if(res.error){
             alert(res.error)
@@ -15,7 +15,7 @@ $("#addCopy-form").on('submit',function(event) {
     })
 })
 
-function addReader(DocID,CopyNo,LibID,Position, response) {
+function addCopy(DocID,CopyNo,LibID,Position, response) {
     $.ajax("api/addCopy.php",{
         method:"post",
         success:response,

@@ -20,4 +20,5 @@ if(!$res){
     $res->error = "Unknown error occurred. Please try again later.";
 }
 echo json_encode($res);
+$conn->close();
 ?>

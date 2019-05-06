@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in -The City Library APP</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/jquery.js" type="text/javascript"></script>
+</head>
+<body class="center">
+
+<h1 align="center" class="font-weight-lighter">Welcome to City Library APP!</h1>
+<form class="login-form" id="login-form" onsubmit="adminCheck()">
+    <div class="form-group">
+        <label for="IDInput">ID(Default: 123)</label>
+        <input name="id" class="form-control" id="IDInput" aria-describedby="IDHelp" placeholder="Enter ID">
+    </div>
+    <div class="form-group">
+        <label for="PasswordInput">Password(Default: 123)</label>
+        <input type="password" name="password" class="form-control" id="PasswordInput" placeholder="Password">
+    </div>
+    <div class="right">
+        <label>
+            <input id="Rmb" type="checkbox" /> Remember Me</label>
+    </div>
+    <br>
+    <div class="center">
+        <button type="submit" class="btn btn-primary btn-lg" id="smbtn" >Log In</button>
+    </div>
+
+    <br>
+
+</form>
+<form id="reader-form" class="login-form" style="display: none">
+    <div class="form-group">
+    <label for="CardNO">Please type your card number(Reader ID): </label>
+    <input type="text" class="form-control" id="CardNO" placeholder="Card Number">
+</div>
+    <div class="center">
+        <button type="submit" class="btn btn-primary btn-lg" id="smbtn2" >Log In</button>
+    </div>
+    <br>
+</form>
+<div>
+    <br>
+    <input type="radio" id="adminMenu" name="userType" value="admin" checked> Admin<br><br>
+    <input type="radio" id="readerMenu" name="userType" value="reader" > Reader</div>
+<script src="js/init.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -3,8 +3,8 @@ include_once('dbcheck.php');
 $res = null;
 if(isset($_POST['libID'])) {
     $libID = $_POST['libID'];
-//    $sql = "SELECT DOCID, TITLE FROM (SELECT TOP 10 FROM (SELECT DOCID, TITLE, COUNT(*) FROM DOCUMENT AS D, BORROWS AS B WHERE D.DOCID = B.DOCID AND LIBID = '$libID' GROUP BY DOCID) ORDER BY COUNT(BORNUMBER) );";
-    $sql = "SELECT * FROM DOCUMENT";
+   $sql = "SELECT DOCID, TITLE FROM (SELECT TOP 10 FROM (SELECT DOCID, TITLE, COUNT(*) FROM DOCUMENT AS D, BORROWS AS B WHERE D.DOCID = B.DOCID AND LIBID = '$libID' GROUP BY DOCID) ORDER BY COUNT(BORNUMBER) );";
+//     $sql = "SELECT * FROM DOCUMENT";
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         $res->msg = "";

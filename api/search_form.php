@@ -21,7 +21,7 @@ if(isset($_POST['value'],$_POST['searchBy'],$_POST['searchType'])
                         ";
                 break;
             case "pname":
-                $sql = "SELECT D.DOCID D.TITLE D.PDATE D.PUBLISHERID
+                $sql = "SELECT D.DOCID,D.TITLE,D.PDATE,D.PUBLISHERID
                         FROM DOCUMENT AS D, PUBLISHER AS P
                         WHERE D.PUBLISHERID = P.PUBLISHERID AND P.PUBNAME = '$value';
                         ";

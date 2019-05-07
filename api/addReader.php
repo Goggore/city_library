@@ -26,4 +26,5 @@ else{
 }
 
 echo json_encode($res);
+$conn->close();
 ?>

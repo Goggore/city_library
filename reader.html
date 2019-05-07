@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/app.js" type="text/javascript"></script>
     <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
 <div>
@@ -25,10 +26,107 @@
 </div>
 <div id="booksPage">
     <div style="padding-top: 2%">
-        <button type="button" class="btn btn-secondary" style="margin-left:2%;display: inline-block">Checkout</button>
-        <button type="button" class="btn btn-secondary" style="margin-left:1%;display: inline-block">Return</button>
-        <button type="button" class="btn btn-secondary" style="margin-left:1%;display: inline-block">Search</button>
-        <button type="button" class="btn btn-secondary" style="margin-left:1%;display: inline-block">Compute fine</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".checkout-modal" style="margin-left:2%;display: inline-block">Checkout</button>
+        <div class="modal checkout-modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form class="checkout-form" id="checkout-form">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Document ID</span>
+                            </div>
+                            <input type="text" id="checkout_form_docid" class="form-control checkout-btn">
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Copy &emsp;&nbsp; No.</span>
+                            </div>
+                            <input type="text" id="checkout_form_copyno" class="form-control checkout-btn">
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Library &emsp;&nbsp;ID</span>
+                            </div>
+                            <input type="text" id="checkout_form_libid" class="form-control checkout-btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".return-modal" style="margin-left:1%;display: inline-block">Return</button>
+        <div class="modal return-modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form class="return-form" id="return-form">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Borrow No.</span>
+                            </div>
+                            <input type="text" id="return_form_bno" class="form-control return-btn">
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Library &nbsp;ID</span>
+                            </div>
+                            <input type="text" id="return_form_libid" class="form-control return-btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".search-modal" style="margin-left:1%;display: inline-block">Search</button>
+        <div class="modal search-modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form class="search-form" id="search-form">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="readerInput"></span>
+                            </div>
+                            <input type="text" id="search_form_value" class="form-control search-btn">
+                        </div>
+                        <div class="input-group input-group-sm" style="display: inline-block">
+                            <div class="input-group-prepend">
+                                <span id="searchbyDes">&nbsp;Search by:</span>
+                            </div>
+                            <select id="searchBy" style="margin-left: 2%">
+                                <option value="docid">ID</option>
+                                <option value="title">Title</option>
+                                <option value="pname">Publisher Name</option>
+                            </select>
+                            <div style="margin-top: 1%">&nbsp;Search:
+                            <input type="radio" style="margin-left: 40%" id="searchDoc" name="searchType" value="searchDoc" checked> Document&nbsp;
+                            <input type="radio" id="searchPub" name="searchType" value="searchPub" > Publisher</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".fine-modal" style="margin-left:1%;display: inline-block">Compute fine</button>
+        <div class="modal fine-modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form class="fine-form" id="fine-form">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Copy &emsp;&nbsp; No.</span>
+                            </div>
+                            <input type="text" id="fine_form_copyno" class="form-control fine-btn">
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Document ID</span>
+                            </div>
+                            <input type="text" id="fine_form_docid" class="form-control fine-btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <?php
     include_once('api/dbcheck.php');
 $sql = "SELECT TITLE, PDATE FROM DOCUMENT";
@@ -47,7 +145,34 @@ $result = $conn->query($sql);
 </div>
 <div id="reservationPage" style="display: none">
     <div style="padding-top: 2%">
-        <button type="button" class="btn btn-secondary" style="margin-left:2%;display: inline-block">Reserve</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".reserve-modal" style="margin-left:2%;display: inline-block">Reserve</button>
+        <div class="modal reserve-modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form class="reserve-form" id="reserve-form">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Document ID</span>
+                            </div>
+                            <input type="text" id="reserve_form_docid" class="form-control reserve-btn">
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Copy &emsp;&nbsp; No.</span>
+                            </div>
+                            <input type="text" id="reserve_form_copyno" class="form-control reserve-btn">
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Library &emsp;&nbsp;ID</span>
+                            </div>
+                            <input type="text" id="reserve_form_libid" class="form-control reserve-btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <?php
     include_once('api/dbcheck.php');
 $sql = "SELECT RNAME, ADDRESS FROM READER WHERE READERID = $user";
@@ -64,11 +189,14 @@ $result = $conn->query($sql);
         $conn->close();
         ?>
     </div>
+
 </div>
 <script>
 
 var btns = ['#books','#reservation']
     switchPage(btns)
 </script>
+
+<script src="js/reader.js" type="text/javascript"></script>
 </body>
 </html>

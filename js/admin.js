@@ -7,6 +7,7 @@ $(".analysis-fb-btn").keypress(function(event) {
 });
 $("#analysis-fb").on('submit',function(event) {
     event.preventDefault()
+
     var libID = event.target.analysis_fb_value.value
     analysis_FB(libID,function (Res) {
         var res = JSON.parse(Res)
@@ -37,6 +38,7 @@ $(".analysis-books-btn").keypress(function(event) {
 });
 $("#analysis-books").on('submit',function(event) {
     event.preventDefault()
+
     var libID = event.target.analysis_books_value.value
     analysis_BK(libID,function (Res) {
         var res = JSON.parse(Res)
@@ -93,6 +95,31 @@ function analysis_FINE(response) {
             }
         },
         data: {
+        }
+    })
+}
+
+
+$("#searchStatus-form").on('submit',function(event) {
+    event.preventDefault()
+    var docid = event.target.searchStatus.value
+    searchStatus_form(docid,function (Res) {
+        var res = JSON.parse(Res)
+        if(res.error){
+            alert(res.error)
+        }
+        else {
+            alert(res.msg)
+        }
+    })
+})
+function searchStatus_form(docid,response) {
+    $.ajax("api/searchStatus_form.php",{
+        method:"post",
+        success:response,
+        datatype: "json",
+        data: {
+            docid:docid,
         }
     })
 }

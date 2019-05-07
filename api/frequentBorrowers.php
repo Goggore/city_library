@@ -3,7 +3,14 @@ include_once('dbcheck.php');
 $res = null;
 if(isset($_POST['libID'])) {
     $libID = $_POST['libID'];
-    $sql = "SELECT * FROM (SELECT TOP 10 FROM (SELECT READERID, RNAME, COUNT(*) FROM READER AS R, BORROWS AS B WHERE R.READERID = B.READERID AND LIBID = '$libID' GROUP BY READERID) ORDER BY COUNT(BORNUMBER) );";
+    $sql = "SELECT *
+FROM (SELECT READERID, RNAME, COUNT(BORNUMBER) AS BORCOUNT
+		FROM READER AS R, BORROWS AS B
+		WHERE R.READERID = B.READERID AND LIBID = $libID
+		GROUP BY READERID)
+	ORDER BY COUNT(BORNUMBER) 
+HAVING COUNT(BORCOUNT) <= 10;
+";
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         $res->msg = "";
